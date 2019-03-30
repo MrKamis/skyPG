@@ -1,0 +1,9 @@
+Options FollowSymLinks
+RewriteEngine On
+RewriteRule ^$ index.php?page=home [L]
+RewriteRule ^profil$ index.php?page=profile [L]
+RewriteRule ^login/try$ index.php?page=login&action=try [L]
+RewriteRule ^login$ index.php?page=login [L]
+RewriteRule ^profile/([a-zA-Z]+)$ index.php?page=profile&username=$1 [L]
+RewriteRule ^profile$ index.php?page=profile [L]
+RewriteRule ^register$ index.php?page=register [L]

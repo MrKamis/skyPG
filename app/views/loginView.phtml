@@ -1,0 +1,19 @@
+<form class="container text-center text-dark p-3" method="POST" action="login/try">
+    <?php
+        echo $error ? "<div class='badge badge-warning'>$error</div>" : '';
+    ?>
+    <div class="form-group">
+        <label>
+            Nick:
+            <input type="text" class="form-control" aria-describedby="nickHelper" placeholder="nick..." name="username" autofocus>
+            <small id="nickHelper">Nie może zawierać znaków: #, spacja, &gt;, &lt;</small>
+        </label>
+    </div>
+    <div class="form-group">
+        <label>
+            Hasło:
+            <input type="password" class="form-control" placeholder="haslo..." name="password">
+        </label>
+    </div>
+    <input class="btn btn-primary" value="Zaloguj" type="submit">
+</form>
