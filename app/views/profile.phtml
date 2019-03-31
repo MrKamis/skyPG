@@ -1,0 +1,7 @@
+<?php
+    if (isset($_GET['username'])) {
+        require_once __DIR__ . '\profile/anotherProfile.phtml';
+    } else {
+        require_once __DIR__ . '\profile/myProfile.phtml';
+    }
+?>

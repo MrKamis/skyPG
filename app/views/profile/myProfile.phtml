@@ -1,0 +1,71 @@
+<div class="container p-3">
+    <?php
+        require_once __DIR__ . '\..\..\helpers/user.php';
+        $data = User::getAllInfo()[0];
+        echo '<h3>' . $data['username'] . '</h3> <h6>' . $data['level'] . ' poziom</h6><h6>Waluta: ' . $data['coins'] . '</h6>';
+        $statistics = json_decode($data['statistics']);
+    ?>
+    <div class="row">
+        <table class="table table-striped col-md-5">
+            <thead>
+                <tr>
+                    <th>Umiejętność</th>
+                    <th>Punkty</th>
+                    <th>Cena za następny</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Siła</td>
+                    <td><?php echo $statistics->strength ?></td>
+                    <td>$<?php echo round($statistics->strength * 1.2 * $data['level'] * 0.4) ?> - <?php echo ($data['coins'] - $statistics->strength * 1.2 * $data['level'] * 0.4) >= 0 ? '<button class="btn btn-primary">Wykup</button>' : '<button class="btn btn-secondary">Wykup</button>' ?></td>
+                </tr>
+                <tr>
+                    <td>Życie</td>
+                    <td><?php echo $statistics->health ?></td>
+                    <td>$<?php echo round($statistics->health * 0.4 * $data['level'] * 0.2) ?> - <?php echo ($data['coins'] - $statistics->health * 0.4 * $data['level'] * 0.2) >= 0 ? '<button class="btn btn-primary">Wykup</button>' : '<button class="btn btn-secondary">Wykup</button>' ?></td>
+                </tr>
+                <tr>
+                    <td>Krytyk</td>
+                    <td><?php echo $statistics->critical ?></td>
+                    <td>$<?php echo round($statistics->critical * 1.6 * $data['level'] * 0.6) ?> - <?php echo ($data['coins'] - $statistics->critical * 1.6 * $data['level'] * 0.6) >= 0 ? '<button class="btn btn-primary">Wykup</button>' : '<button class="btn btn-secondary">Wykup</button>' ?></td>
+                </tr>
+                <tr>
+                    <td>Blok</td>
+                    <td><?php echo $statistics->block ?></td>
+                    <td>$<?php echo round($statistics->block * 1.6 * $data['level'] * 0.6) ?> - <?php echo ($data['coins'] - $statistics->block * 1.6 * $data['level'] * 0.6) >= 0 ? '<button class="btn btn-primary">Wykup</button>' : '<button class="btn btn-secondary">Wykup</button>' ?></td>
+                </tr>
+                <tr>
+                    <td>Szczęście</td>
+                    <td><?php echo $statistics->luck ?></td>
+                    <td>$<?php echo round($statistics->luck * 1.8 * $data['level'] * 0.7) ?> - <?php echo ($data['coins'] - $statistics->luck * 1.8 * $data['level'] * 0.7) >= 0 ? '<button class="btn btn-primary">Wykup</button>' : '<button class="btn btn-secondary">Wykup</button>' ?></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="col-md-1">
+        </div>
+        <table class="table table-striped col-md-6">
+            <thead>
+                <tr>
+                    <th>Nazwa przedmiotu</th>
+                    <th>Typ</th>
+                    <th>Statystyki</th>
+                    <th>Stan</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    $eq = json_decode($data['eq']);
+                    for ($i = 0; $i < count($eq); $i++) {
+
+                    }
+                ?>
+            </tbody>
+        </table>
+        <div class="text-center container p-3">
+            <a class="btn btn-primary" href="">Zatwierdz zmiany!</a>
+        </div>
+    </div>
+</div>
+
+<?php session_write_close(); ?>

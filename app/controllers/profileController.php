@@ -10,7 +10,7 @@
             }
         }
         private function loadView() {
-            
+            require_once __DIR__ . '\..\views/profile.phtml';
         }
     }
 ?>
