@@ -21,6 +21,14 @@
                     require_once __DIR__ . '\..\controllers/profileController.php';
                     $controller = new ProfileController();
                     break;
+                case 'smith':
+                    require_once __DIR__ . '\..\controllers/smithController.php';
+                    $controller = new SmithController();
+                    break;
+                case 'transaction':
+                    require_once __DIR__ . '\..\controllers/transactionController.php';
+                    $controller = new TransactionController($_GET);
+                    break;
                 default:
 
                     break;

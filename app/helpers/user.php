@@ -52,7 +52,15 @@
             session_write_close();
             $query->execute();
             $result = $query->fetchAll(PDO::FETCH_ASSOC);
-            return $result;
+            return $result[0];
+        }
+        public static function getAllUsers() {
+            require_once __DIR__ . '\..\database/db.php';
+            $conn = Db::getPDO();
+            $query = $conn->prepare('SELECT username, level, ranking, statistics, eq FROM users ORDER BY ranking');
+            $query->execute();
+            $result = $query->fetchAll(PDO::FETCH_ASSOC);
+            return $result[0];
         }
     }
 ?>

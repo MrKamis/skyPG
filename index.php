@@ -22,6 +22,18 @@
                     <a class="nav-link" href="/profile">profil</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="/smith">kowal</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/adventure">przygoda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/job">praca</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/ranking">ranking</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="/login">wyloguj</a>
                 </li>
             </ul>

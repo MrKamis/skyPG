@@ -1,3 +1,6 @@
 body {
   background-image: url('../images/background-image.jpg');
 }
+.btn-link {
+  cursor: pointer;
+}

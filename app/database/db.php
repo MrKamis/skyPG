@@ -17,7 +17,8 @@
                 `statistics` TEXT DEFAULT `{ "strength": 15, "health": 100, "critical": 5, "block": 5, "luck": 5 }`, 
                 `race` TEXT, 
                 `desc` TEXT DEFAULT "", 
-                `banned` INTEGER DEFAULT 0 )');
+                `banned` INTEGER DEFAULT 0,
+                `ranking` INTEGER DEFAULT 0)');
         $query->execute();
         }
     }

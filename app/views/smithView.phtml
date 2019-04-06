@@ -1,0 +1,57 @@
+<div class="container p-3">
+    <h3>Kowal:</h3>
+    <h6>Twoja waluta: <?php echo $user['coins']; ?></h6>
+
+    <div class="row">
+        <table class="table table-striped col-md-5">
+            <thead>
+                <tr>
+                    <th>Nazwa</th>
+                    <th>Jakość</th>
+                    <th>Cena</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    require_once __DIR__ . '\..\helpers/weapon.php';
+                    $table = [];
+                    for ($i = 0; $i < 5; $i++) {
+                        $weapon = new Weapon($user);
+                        array_push($table, $weapon);
+                        echo '<tr>
+                            <td>' . $weapon->typeOfWeapon . ' ' . $weapon->name . '</td>
+                            <td>' . $weapon->HTMLQuality . '</td>
+                            <td class="text-center"><a class="btn-link" href="buy/weapon/' . $weapon->id . '">$' . $weapon->value . '</a></td>
+                        </tr>';
+                    }
+                    Weapon::write($table);
+                ?>
+            </tbody>
+        </table>
+        <div class="col-md-2">
+        </div>
+        <table class="table table-striped col-md-5">
+            <thead>
+                <tr>
+                    <th>Nazwa</th>
+                    <th>Jakość</th>
+                    <th>Cena</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    require_once __DIR__ . '\..\helpers/armor.php';
+                    for ($i = 0; $i < 5; $i++) {
+                        /*$armor = new Armor($user);
+                        echo '<tr>
+                            <td>' . $armor->typeOfWeapon . ' ' . $armor->name . '</td>
+                            <td>' . $armor->HTMLQuality . '</td>
+                            <td class="text-center"><button class="btn-link">$' . $armor->value . '</button></td>
+                        </tr>';*/
+                    }
+                ?>
+            </tbody>
+        </table>
+    </div>
+
+</div>
