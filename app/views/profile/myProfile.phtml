@@ -4,46 +4,49 @@
         $data = User::getAllInfo();
         echo '<h3>' . $data['username'] . '</h3> <h6>' . $data['level'] . ' poziom</h6><h6>Waluta: ' . $data['coins'] . '</h6>';
         $statistics = json_decode($data['statistics']);
+        require_once __DIR__ . '\..\..\helpers/statistics.php';
+        $realStatistics = Statistics::getStatisticsWithEq($data['username']);
         require_once __DIR__ . '\..\..\helpers/experience.php';
         echo '<h6>Doświadczenie: ' . Experience::getHTML() . '</h6>';
     ?>
     <div class="row">
-        <table class="table table-striped col-md-5">
-            <thead>
-                <tr>
-                    <th>Umiejętność</th>
-                    <th>Punkty</th>
-                    <th>Cena za następny</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Siła</td>
-                    <td><?php echo $statistics->strength ?></td>
-                    <td class="text-center">$<?php echo round($statistics->strength * 1.2 * $data['level'] * 0.4) ?> - <?php echo ($data['coins'] - $statistics->strength * 1.2 * $data['level'] * 0.4) >= 0 ? '<span class="btn-link">Wykup</span>' : '<span class="btn-link">Wykup</span>' ?></td>
-                </tr>
-                <tr>
-                    <td>Życie</td>
-                    <td><?php echo $statistics->health ?></td>
-                    <td class="text-center">$<?php echo round($statistics->health * 0.4 * $data['level'] * 0.2) ?> - <?php echo ($data['coins'] - $statistics->health * 0.4 * $data['level'] * 0.2) >= 0 ? '<span class="btn-link"">Wykup</span>' : '<span class="btn-link">Wykup</span>' ?></td>
-                </tr>
-                <tr>
-                    <td>Krytyk</td>
-                    <td><?php echo $statistics->critical ?></td>
-                    <td class="text-center">$<?php echo round($statistics->critical * 1.6 * $data['level'] * 0.6) ?> - <?php echo ($data['coins'] - $statistics->critical * 1.6 * $data['level'] * 0.6) >= 0 ? '<span class="btn-link"">Wykup</span>' : '<span class="btn-link">Wykup</span>' ?></td>
-                </tr>
-                <tr>
-                    <td>Blok</td>
-                    <td><?php echo $statistics->block ?></td>
-                    <td class="text-center">$<?php echo round($statistics->block * 1.6 * $data['level'] * 0.6) ?> - <?php echo ($data['coins'] - $statistics->block * 1.6 * $data['level'] * 0.6) >= 0 ? '<span class="btn-link"">Wykup</span>' : '<span class="btn-link">Wykup</span>' ?></td>
-                </tr>
-                <tr>
-                    <td>Szczęście</td>
-                    <td><?php echo $statistics->luck ?></td>
-                    <td class="text-center">$<?php echo round($statistics->luck * 1.8 * $data['level'] * 0.7) ?> - <?php echo ($data['coins'] - $statistics->luck * 1.8 * $data['level'] * 0.7) >= 0 ? '<span class="btn-link"">Wykup</span>' : '<span class="btn-link">Wykup</span>' ?></td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="col-md-5">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Umiejętność</th>
+                        <th>Punkty</th>
+                        <th>Cena za następny</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Siła</td>
+                        <td><?php echo $realStatistics->strength ?></td>
+                        <td class="text-center btn-link" id="strength">$<?php echo Statistics::howMuchCost($statistics->strength, 0, $data['level']); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Życie</td>
+                        <td><?php echo $realStatistics->health ?></td>
+                        <td class="text-center btn-link" id="strength">$<?php echo Statistics::howMuchCost($statistics->health, 1, $data['level']); ?></td>
+                    <tr>
+                        <td>Krytyk</td>
+                        <td><?php echo $realStatistics->critical ?></td>
+                        <td class="text-center btn-link" id="strength">$<?php echo Statistics::howMuchCost($statistics->critical, 2, $data['level']); ?></td>
+                    <tr>
+                        <td>Blok</td>
+                        <td><?php echo $realStatistics->block ?></td>
+                        <td class="text-center btn-link" id="strength">$<?php echo Statistics::howMuchCost($statistics->block, 3, $data['level']); ?></td>
+                    <tr>
+                        <td>Szczęście</td>
+                        <td><?php echo $realStatistics->luck ?></td>
+                        <td class="text-center btn-link" id="strength">$<?php echo Statistics::howMuchCost($statistics->luck, 4, $data['level']); ?></td>
+                </tbody>
+            </table>
+            <div class="text-center container p-3">
+                <a class="btn btn-primary" href="">Zatwierdz zmiany!</a>
+            </div>
+        </div>
         <div class="col-md-1">
         </div>
         <table class="table table-striped col-md-6">
@@ -59,23 +62,22 @@
                 <?php
                     $eq = json_decode($data['eq']);
                     for ($i = 0; $i < count($eq); $i++) {
-                        echo '<tr>
-                            <td>' . $eq[$i]->typeOfWeapon . ' ' . $eq[$i]->name . '</td>
+                        echo '<tr><td>';
+                        echo isset($eq[$i]->typeOfWeapon) ? $eq[$i]->typeOfWeapon : $eq[$i]->typeOfArmor;
+                        echo ' ' . $eq[$i]->name . '</td>
                             <td>' . $eq[$i]->type . '</td>
                             <td>' . $eq[$i]->HTMLQuality . '</td><td>';
                             if ($eq[$i]->state == false) {
-                                echo '<a class="btn-link" href="#">Załóż</a>';
+                                echo '<a class="btn-link" href="equip/' . $eq[$i]->id . '">Załóż</a>';
                             } else {
-                                echo '<a class="btn-link" href="#">Zdejmij</a>';
+                                echo '<a class="btn-link" href="dequip/' . $eq[$i]->id . '">Zdejmij</a>';
                             }
+                            echo '/<a class="btn-link" href="sell/' . $eq[$i]->id . '">Sprzedaj</a>';
                         echo '</td></tr>';
                     }
                 ?>
             </tbody>
         </table>
-        <div class="text-center container p-3">
-            <a class="btn btn-primary" href="">Zatwierdz zmiany!</a>
-        </div>
     </div>
 </div>
 

@@ -7,7 +7,7 @@
     <title>SkyPG - MMORPG</title>
     <base href="/">
     <link href="public/stylesheets/bootstrap.min.css" rel="stylesheet">
-    <link href="public/stylesheets/main.css" rel="stylesheet">
+    <link href="public/stylesheets/main.css#2" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">

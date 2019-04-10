@@ -1,0 +1,52 @@
+<?php
+    require_once __DIR__ . '\..\..\helpers/statistics.php';
+    require_once __DIR__ . '\..\..\helpers/user.php';
+    $user = User::getPublicInfo($_GET['username']);
+    if (empty($user)) {
+        header('Location: \profile');
+        exit;
+    }
+    $user = $user[0];
+    $statistics = Statistics::getStatisticsWithEq($user['username']);
+?>
+<div class="container p-3">
+    <h3><?php echo $user['username']; ?></h3>
+    <h6>Poziom: <?php echo $user['level']; ?></h6>
+    <div class="row">
+        <table class="col-md-5 table table-striped">
+            <thead>
+                <tr>
+                    <th>Umiejętność</th>
+                    <th>Punkty</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Siła</td>
+                    <td><?php echo $statistics->strength; ?></td>
+                </tr>
+                <tr>
+                    <td>Życie</td>
+                    <td><?php echo $statistics->health; ?></td>
+                </tr>
+                <tr>
+                    <td>Krytyk</td>
+                    <td><?php echo $statistics->critical; ?></td>
+                </tr>
+                <tr>
+                    <td>Blok</td>
+                    <td><?php echo $statistics->block; ?></td>
+                </tr>
+                <tr>
+                    <td>Szczęście</td>
+                    <td><?php echo $statistics->luck; ?></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="col-md-2"></div>
+        <div class="col-md-5 text-center">
+            <a class="btn btn-primary" href="attack/<?php echo $user['username']; ?>">Zaatakuj</a>
+            <a class="btn btn-secondary" href="message/send/<?php echo $user['username']; ?>">Wyślij wiadomość</a>
+        </div>
+    </div>
+</div>

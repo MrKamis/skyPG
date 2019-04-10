@@ -1,6 +1,20 @@
 body {
-    background-image: url('./../images/background-image.jpg');
+    background: linear-gradient(-45deg, #bbb, #aaa, #ddd, #ccc);
+    background-size: 400% 400%;
+    animation: gradiet 15s ease infinite;
 }
 .btn-link {
     cursor: pointer;
+}
+
+@keyframes gradiet {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }

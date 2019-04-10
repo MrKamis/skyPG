@@ -14,17 +14,17 @@
             <tbody>
                 <?php
                     require_once __DIR__ . '\..\helpers/weapon.php';
-                    $table = [];
-                    for ($i = 0; $i < 5; $i++) {
-                        $weapon = new Weapon($user);
-                        array_push($table, $weapon);
+                    require_once __DIR__ . '\..\helpers/user.php';
+                    $user = User::getAllInfo();
+                    $weapons = json_decode($user['weapons']);
+                    for ($i = 0; $i < count($weapons); $i++) {
+                        $weapon = $weapons[$i];
                         echo '<tr>
                             <td>' . $weapon->typeOfWeapon . ' ' . $weapon->name . '</td>
                             <td>' . $weapon->HTMLQuality . '</td>
                             <td class="text-center"><a class="btn-link" href="buy/weapon/' . $weapon->id . '">$' . $weapon->value . '</a></td>
                         </tr>';
                     }
-                    Weapon::write($table);
                 ?>
             </tbody>
         </table>
@@ -41,13 +41,16 @@
             <tbody>
                 <?php
                     require_once __DIR__ . '\..\helpers/armor.php';
-                    for ($i = 0; $i < 5; $i++) {
-                        /*$armor = new Armor($user);
+                    require_once __DIR__ . '\..\helpers/user.php';
+                    $user = User::getAllInfo();
+                    $armors = json_decode($user['armors']);
+                    for ($i = 0; $i < count($armors); $i++) {
+                        $armor = $armors[$i];
                         echo '<tr>
-                            <td>' . $armor->typeOfWeapon . ' ' . $armor->name . '</td>
+                            <td>' . $armor->typeOfArmor . ' ' . $armor->name . '</td>
                             <td>' . $armor->HTMLQuality . '</td>
-                            <td class="text-center"><button class="btn-link">$' . $armor->value . '</button></td>
-                        </tr>';*/
+                            <td class="text-center"><a class="btn-link" href="buy/armor/' . $armor->id . '">$' . $armor->value . '</a></td>
+                        </tr>';
                     }
                 ?>
             </tbody>
