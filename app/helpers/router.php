@@ -29,6 +29,20 @@
                     require_once __DIR__ . '\..\controllers/transactionController.php';
                     $controller = new TransactionController($_GET);
                     break;
+                case 'equip':
+                    require_once __DIR__ . '\..\controllers/equipController.php';
+                    if (!isset($_GET['id'])) {
+                        return header('Location: \profile');
+                    }
+                    EquipController::equipItem($_GET['id']);
+                    return header('Location: \profile');
+                    break;
+                case 'dequip':
+
+                    break;
+                case 'sell':
+
+                    break;
                 default:
 
                     break;

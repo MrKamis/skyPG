@@ -62,5 +62,15 @@
             $result = $query->fetchAll(PDO::FETCH_ASSOC);
             return $result[0];
         }
+        public static function writeEq($eq) {
+            require_once __DIR__ . '\..\database/db.php';
+            $conn = Db::getPDO();
+            $query = $conn->prepare('UPDATE users SET eq = ? WHERE username = ?');
+            $eq = json_encode($eq);
+            $query->bindParam(1, $eq);
+            $username = self::getAllInfo()['username'];
+            $query->bindParam(2, $username);
+            $query->execute();
+        }
     }
 ?>
