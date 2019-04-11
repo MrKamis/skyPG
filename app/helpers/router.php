@@ -38,10 +38,19 @@
                     return header('Location: \profile');
                     break;
                 case 'dequip':
-
+                    require_once __DIR__ . '\..\controllers/dequipController.php';
+                    if (!isset($_GET['id'])) {
+                        return header('Location: \profile');
+                    }
+                    DequipController::dequipItem($_GET['id']);
+                    return header('Location: \profile');
                     break;
                 case 'sell':
-
+                    if (!isset($_GET['id'])) {
+                        return header('Location: \profile');
+                    }
+                    require_once __DIR__ . '\..\controllers/sellController.php';
+                    $controller = new SellController($_GET['id']);
                     break;
                 default:
 

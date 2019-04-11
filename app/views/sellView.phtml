@@ -1,0 +1,16 @@
+<form class="container p-3 text-center" action="sell/<?php echo $item->id; ?>">
+    <?php
+        if (isset($item->typeOfWeapon)) {
+            echo '<h3>' . $item->typeOfWeapon . ' ' . $item->name .'</h3>';
+        } else {
+            echo '<h3>' . $item->typeOfArmor . ' ' . $item->name .'</h3>';
+        }
+        echo '<h6>' . $item->HTMLQuality . '</h6>';
+    ?>
+    <label>
+        Cena: 
+        <input class="form-control" type="number" name="cost">
+    </label>
+    <br>
+    <input type="submit" class="btn btn-danger" value="Sprzedaj!">
+</form>
