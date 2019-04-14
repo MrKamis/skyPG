@@ -1,0 +1,23 @@
+<form class="container p-3 text-center" action="register/check" method="POST">
+    <div class="form-group">
+        <label>
+            Nick:
+            <input class="form-control" name="username" type="text" autofocus placeholder="nick..." aria-describedby="usernameHelper">
+            <small id="usernameHelper">Nie może zawierać znaków: #, spacja, &gt;, &lt;</small>
+        </label>
+        <br>
+        <label>
+            Hasło:
+            <input class="form-control" name="password" type="password" placeholder="haslo..." aria-describedby="passwordHelper">
+            <small id="passwordHelper">Lepiej używaj mocnego hasła!</small>
+        </label>
+        <br>
+        <label>
+            Powtórz hasło:
+            <input class="form-control" name="password2" type="password" placeholder="haslo...">
+        </label>
+        <br>
+        <br>
+        <input class="btn btn-primary" type="submit" name="submit" value="Zarejestruj">
+    </div>
+</form>

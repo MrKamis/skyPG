@@ -15,7 +15,8 @@
                     $controller = new LoginController($get);
                     break;
                 case 'register':
-
+                    require_once __DIR__ . '\..\controllers/registerController.php';
+                    $controller = new RegisterController($get);
                     break;
                 case 'profile':
                     require_once __DIR__ . '\..\controllers/profileController.php';

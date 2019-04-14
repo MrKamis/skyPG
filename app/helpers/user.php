@@ -1,5 +1,12 @@
 <?php
+    /**
+    * Class of User
+    */
     class User {
+        /**
+        * Check is user logged
+        * @return boolean
+        */
         public static function isLogged() {
             session_start();
             if (isset($_SESSION['username']) && $_SESSION['logged']) {
@@ -71,6 +78,20 @@
             $username = self::getAllInfo()['username'];
             $query->bindParam(2, $username);
             $query->execute();
+        }
+        public static function register($username, $password) {
+            require_once __DIR__ . '\..\database/db.php';
+            $conn = Db::getPDO();
+            $query = $conn->prepare('INSERT INTO users(username, password) VALUES(?, ?)');
+            $query->bindParam(1, $username);
+            $passwordC = crypt($password, $username);
+            $query->bindParam(2, $passwordC);
+            if ($query->execute()) {
+                self::tryLogin($username, $password);
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 ?>
